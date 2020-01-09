@@ -1,8 +1,9 @@
 const Sequelize = require('sequelize');
 
 const sequelize = new Sequelize('jamify-muzik', 'davidlavieri', 'lavierinode', {
-    host: 'localhost',
+    host: process.env.DATABASE_URL,
     dialect: 'postgres',
+    protocol: 'postgres',
     omitNull: true,
 });
 

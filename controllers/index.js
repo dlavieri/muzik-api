@@ -7,6 +7,7 @@ const jwt = require('jsonwebtoken');
 const { check, validatorResult } = require('express-validator');
 
 exports.getHome = (req, res, next) => {
+    console.log("attemoting to access home");
     Mood.findAll()
     .then(moods => {
         return res.json(moods);
