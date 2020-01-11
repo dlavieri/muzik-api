@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize');
 
-const sequelize = require('../util/database');
+const sequelize = require('./index');
 
 const User = sequelize.define('user', {
     email: {

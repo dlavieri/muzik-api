@@ -1,8 +1,8 @@
 const Sequelize = require('sequelize');
 
-const db = require('../util/database');
+const sequelize = require('./index');
 
-const Song = db.define('song', {
+const Song = sequelize.define('song', {
     _id: {
         type: Sequelize.INTEGER,
         autoIncrement: true,
