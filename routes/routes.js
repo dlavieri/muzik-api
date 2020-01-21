@@ -10,7 +10,7 @@ router.get('/moods/:moodId', isAuth, apiRoutes.getMood);
 
 router.post('/add-music', apiRoutes.postSong);
 
-router.put('/new-user', apiRoutes.putUser);
+router.post('/new-user', apiRoutes.newUser);
 
 router.post('/login', apiRoutes.login);
 

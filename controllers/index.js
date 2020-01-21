@@ -72,7 +72,7 @@ exports.postSong = (req, res, next) => {
     
 };
 
-exports.putUser = (req, res, next) => {
+exports.newUser = (req, res, next) => {
     const userEmail = req.body.email;
     const userPass = req.body.password;
 
