@@ -7,7 +7,6 @@ const jwt = require('jsonwebtoken');
 const { check, validatorResult } = require('express-validator');
 
 exports.getHome = (req, res, next) => {
-    console.log("attemoting to access home");
     Mood.findAll()
     .then(moods => {
         return res.json(moods);
@@ -92,7 +91,7 @@ exports.putUser = (req, res, next) => {
         return user.createPlaylist({name: "Liked Tracks"});
     })
     .then(() => {
-        res.status(200);
+        return res.status(200);
     })
     .catch(err => console.log(err));
 };
