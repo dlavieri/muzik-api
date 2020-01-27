@@ -90,8 +90,8 @@ exports.newUser = (req, res, next) => {
     .then(user => {
         return user.createPlaylist({name: "Liked Tracks"});
     })
-    .then(() => {
-        return res.status(200);
+    .then(result => {
+        return res.status(200).end();
     })
     .catch(err => console.log(err));
 };
