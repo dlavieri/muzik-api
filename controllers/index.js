@@ -60,13 +60,11 @@ exports.postSong = (req, res, next) => {
     .then(mood => {
         Song.findAll({where: {mp3Path: mp3Path}})
         .then(song => {
-            console.log("creating song")
             return mood.createSong({title: songName, mp3Path: mp3Path })
         })
     })
     .then(() => {
-        console.log("success");
-        res.status(202);
+        res.status(202).end();
     })
     .catch(err=> console.log(err))
     
@@ -126,8 +124,12 @@ exports.postNewPlaylist = (req, res, next) => {
             res.status(400);
             throw new Error("Not signed in!");
         } else {
-            return user.createPlaylist({name: playlistName})
+            user.createPlaylist({name: playlistName});
+            res.status(200);
         }
+    })
+    .then(() => {
+        res.end();
     })
     .catch(err => console.log(err));
 };
@@ -150,7 +152,7 @@ exports.postAddSongToPlaylist = (req, res, next) => {
         return;
     })
     .then(() => {
-        res.status(200);
+        res.status(200).end();
     })
     .catch(err => {
         console.log(err);
@@ -170,7 +172,7 @@ exports.postRemoveSongFromPlaylist = (req, res, next) => {
         return songs[0].playlistSong.destroy();
     })
     .then(res => {
-        res.status(200);
+        res.status(200).end();
     })
     .catch(err => {
         console.log(err)
