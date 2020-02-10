@@ -58,12 +58,7 @@ exports.postSong = (req, res, next) => {
         return mood;
     })
     .then(mood => {
-        Song.findAll({where: {mp3Path: mp3Path}})
-        .then(song => {
-            if (!song) {
-                return mood.createSong({title: songName, mp3Path: mp3Path })
-            }
-        })
+        return mood.createSong({title: songName, mp3Path: mp3Path })
     })
     .then(() => {
         res.status(202).end();
