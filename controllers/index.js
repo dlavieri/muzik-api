@@ -60,7 +60,9 @@ exports.postSong = (req, res, next) => {
     .then(mood => {
         Song.findAll({where: {mp3Path: mp3Path}})
         .then(song => {
-            return mood.createSong({title: songName, mp3Path: mp3Path })
+            if (!song) {
+                return mood.createSong({title: songName, mp3Path: mp3Path })
+            }
         })
     })
     .then(() => {
@@ -77,8 +79,7 @@ exports.newUser = (req, res, next) => {
     User.findByPk(userEmail)
     .then(user => {
         if (user) {
-            res.status(303);
-            throw new Error("Username already exists");
+            res.status(303).end();
         }
         return bcrypt.hash(userPass, 12);
     })
@@ -104,7 +105,7 @@ exports.login = (req, res, next) => {
     })
     .then(isEqual => {
         if (!isEqual) {
-            throw new Error("Incorrect Password!");
+            res.status(500).end();
         }
         const token = jwt.sign({email: user}, "jamifymuzik", {expiresIn: "1h"});
         return res.status(200).json({token: token, user: user});
