@@ -96,6 +96,9 @@ exports.login = (req, res, next) => {
 
     User.findByPk(user)
     .then(user => {
+        if (!user ) {
+            res.status(500).end();
+        }
         return bcrypt.compare(pass, user.password);
     })
     .then(isEqual => {
