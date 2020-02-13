@@ -109,7 +109,7 @@ exports.login = (req, res, next) => {
         return res.status(200).json({token: token, user: user});
     })
     .catch(err => {
-        console.log(err);
+        res.status(503).json({error: err});
     })
 }
 
